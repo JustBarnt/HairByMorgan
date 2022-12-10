@@ -20,6 +20,7 @@ export default defineConfig({
                 ),
             ],
         }),
+        //basicSSL(),
     ],
     server: {
         open: true,

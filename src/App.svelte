@@ -23,7 +23,37 @@
 </header>
 
 <main>
+    <content class="main">
+        <section class="about-me">
+            <div class="about-me-items">
+                <img src="../src/assets/about-me-temp.jpg" alt="Morgan Gebhart">
+                <article class="text">
+                    <p class="about-me-image-name">Morgan Gebhart</p>
+                    <h2 class="about-me-head">Welcome</h2>
+                    <p class="about-me-bio">
+                    If you are interested in a new look or just a touch up, you've come to the right place! I love to help clients find what they're looking for.
+                    Wedding hair is another of my passions. There is no better feeling than to help someone look their best on such an important day. If you would like a wedding hair consultation, please visit my contact page and send me an email.
+                    
+                    Keep up with my latest services by visiting the social links below.
+                    </p>
+                </article>
+            </div>
+        </section>
+        <section class="my-work">
 
+        </section>
+        <section class="contact-me">
+            <form action="mailto:" method="post" enctype="" name="contact-form" class="contact-form">
+                <label class="label-name" for="name">Name</label>
+                <input class="input-name"type="text" name="name" id="name" placeholder="Name" required>
+                <label class="label-email" for="email">Email</label>
+                <input class="input-email"type="email" name="email" id="email" placeholder="Email" required>
+                <label class="label-message" for="message">Message</label>
+                <textarea class="input-message" name="message" id="message" cols="30" rows="10" placeholder="Message" required></textarea>
+                <input class="submit" type="submit" value="Submit">
+            </form>
+        </section>
+    </content>
 </main>
 
 <footer>
@@ -48,9 +78,8 @@
         align-items: center;
         grid-auto-flow: column;
         border-bottom: 0.35rem solid rgb(245, 245, 245);
-
+        background: $main-pink;
         
-
         .logo{
             align-self: center;
         }
@@ -89,6 +118,130 @@
 
     main{
         grid-area: b;
+
+        display: grid;
+
+        content{
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: center;
+
+            section{
+                flex-basis:75%;
+                display: flex;
+            }
+
+            .about-me{
+                display: flex;
+                
+                .about-me-items{
+                    flex-basis: 100%;
+                    display: flex;
+                    flex-flow: column wrap;
+                    justify-content: center;
+                    align-items: center;
+                    gap: 1rem;
+                    padding: 1rem;
+    
+                    img{
+                        max-width: 420px;
+                        height: auto;
+                        object-fit: cover;
+                        border-radius: $bRadius;
+                    }
+    
+                    article{
+                        display: flex;
+                        flex-flow: column wrap;
+                        justify-content: center;
+                        align-items: center;
+                        gap: 2rem;
+                        padding: 1rem;
+    
+                        .about-me-image-name{
+                            font-size: 3rem;
+                            font-family: $logo-font;
+                            text-align: center;
+                        }
+        
+                        .about-me-head{
+                            font-size: 2rem;
+                            font-weight: bold;
+                            text-align: center;
+                        }
+        
+                        .about-me-bio{
+                            width: 50%;
+                            line-height: 1.5em;
+                            font-size: 1.4rem;
+                            text-align: center;
+                        }
+                    }
+    
+                }
+            }
+
+
+            .contact-me{
+                justify-content: center;
+                .contact-form{
+                    display: grid;
+    
+                    gap: 1rem;
+                    padding: 1rem;
+    
+                    label{
+                        text-align: left;
+                        font-size: 1.4rem;
+                        font-weight: bold;
+                    }
+    
+                    input{
+                        padding: 1rem;
+                        border: 0.35rem solid rgb(245, 245, 245);
+                        border-radius: $bRadius;
+                        font-size: 1.4rem;
+                    }
+    
+                    .input-name{
+                        grid-area: 2/1/2/1;
+                    }
+    
+                    .input-email{
+                        grid-area: 2/2/2/2;
+                    }
+    
+                    .label-name{
+                        grid-area: 1/1/1/1;
+                    }
+                    
+                    .label-email{
+                        grid-area: 1/2/1/2;
+                    }
+    
+                    .label-message{
+                        grid-area: 3/1/3/1;
+                    }
+    
+    
+                    textarea{
+                        grid-area: 4/1/4/3;
+                        padding: 1rem;
+                        border: 0.35rem solid rgb(245, 245, 245);
+                        border-radius: $bRadius;
+                        font-size: 1.4rem;
+                    }
+    
+                    input[type="submit"]{
+                        grid-area: 5/1/5/3;
+                        @extend %button;
+                        background: $main-pink;
+                        font-size: 1.4rem;
+                        font-weight: bold;
+                    }
+                }
+            }
+        }
     }
 
     footer{

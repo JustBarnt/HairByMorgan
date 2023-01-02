@@ -50,6 +50,7 @@
 				"after": true
 			}
 		],
+		"@typescript-eslint/ban-ts-comment": 0,
 		"@typescript-eslint/default-param-last": "error",
 		"@typescript-eslint/no-base-to-string": "error",
 		"@typescript-eslint/no-duplicate-enum-values": "error",

@@ -1,10 +1,22 @@
 <script lang="ts">
+    import { onMount } from "svelte";
+    import ChevronLeft from "svelte-material-icons/ChevronLeft.svelte";
+    import ChevronRight from "svelte-material-icons/ChevronRight.svelte";
     import { cubicIn, cubicOut } from "svelte/easing";
     import { slide } from "svelte/transition";
+    import Carousel from "./components/Carousel.svelte";
 
     let animateIn = { duration: 500, easing: cubicOut, delay: 500 };
     let animateOut = { duration: 500, easing: cubicIn };
 
+    let iconProps = { size: "2rem", color: "black", width: "48px", height: "48px", viewBox: "0 0 24 24" };
+    const weddingClientel = import.meta.glob("../src/assets/work/wedding-clientele/*.jpg");
+    const standardClientel = import.meta.glob("../src/assets/work/standard-clientele/*.jpg");
+
+    onMount(() => 
+    {
+        console.log(Object.keys(standardClientel));
+    });
 </script>
 
 <header in:slide={animateIn} out:slide={animateOut}>
@@ -15,18 +27,26 @@
     </content>
     <nav>
         <ul class="navigation">
-            <li class="nav-item button">About Me</li>
-            <li class="nav-item button">My Work</li>
-            <li class="nav-item button">Contact Me</li>
+            <li class="nav-item button"> <a href="#About">
+                About Me
+            </a>
+        </li>
+            <li class="nav-item button"> <a href="#Work">
+                My Work
+            </a>
+        </li>
+            <li class="nav-item button"> <a href="#Contact">
+                Contact Me
+            </a>
+        </li>
         </ul>
-    </nav>
 </header>
 
 <main>
     <content class="main">
-        <section class="about-me">
+        <section class="about-me" id="About">
             <div class="about-me-items">
-                <img src="../src/assets/about-me-temp.jpg" alt="Morgan Gebhart">
+                <img src="../src/assets/about-me-photos/morgan_headshot.jpg" alt="Morgan Gebhart">
                 <article class="text">
                     <p class="about-me-image-name">Morgan Gebhart</p>
                     <h2 class="about-me-head">Welcome</h2>
@@ -39,10 +59,18 @@
                 </article>
             </div>
         </section>
-        <section class="my-work">
-
+        <section class="my-work" id="Work">
+            <div class="carousel">
+                <Carousel autoplay={2000}>
+                    {#each Object.keys(standardClientel) as image}
+                        <img class="carouselImg" src={`./src/${image}`} alt="" />
+                    {/each}
+                    <span slot="left-control"> <ChevronLeft { ...iconProps } /> </span>
+                    <span slot="right-control"> <ChevronRight { ...iconProps } /> </span>
+                </Carousel>
+            </div>
         </section>
-        <section class="contact-me">
+        <section class="contact-me" id="Contact">
             <form action="mailto:" method="post" enctype="" name="contact-form" class="contact-form">
                 <label class="label-name" for="name">Name</label>
                 <input class="input-name"type="text" name="name" id="name" placeholder="Name" required>
@@ -112,6 +140,10 @@
                 text-align: center;
                 @extend %button;
                 font-weight: bold;
+                a{
+                    text-decoration: none;
+                    color: $font-color;
+                }
             }
         }
     }
@@ -181,6 +213,32 @@
                 }
             }
 
+            .my-work{
+                display: flex;
+                flex-flow: column wrap;
+                justify-content: center;
+                align-items: center;
+                gap: 1rem;
+                padding: 1rem;
+
+                .carousel{
+                    padding: 1rem;
+                    width: 100%;
+                    height: 100%;
+                    max-width: 1000px;
+                    max-height: 1000px;
+                    border-radius: $bRadius;
+
+                    .carouselImg{
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                        border-radius: $bRadius;
+                        padding: 0 0.25rem;
+                    }
+                }
+            }
+
 
             .contact-me{
                 justify-content: center;
@@ -209,6 +267,9 @@
     
                     .input-email{
                         grid-area: 2/2/2/2;
+                    }
+                    .input-message{
+                        resize: none;
                     }
     
                     .label-name{

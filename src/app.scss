@@ -1,6 +1,7 @@
 @import "./src/sass/variables.scss";
 @import url('https://fonts.googleapis.com/css2?family=Prata&display=swap');
 
+html, body {width: auto!important; overflow-x: hidden!important} 
 
 :root {
   font-family: $main-font;
@@ -28,8 +29,10 @@
 
 #app {
   height: 100vh;
-  width: 100vw;
+  //width: 100vw;
   display: grid;
   grid-template: "a" "b" "c";
   overflow-y: auto;
+  width: auto!important; 
+  overflow-x: hidden!important
 }

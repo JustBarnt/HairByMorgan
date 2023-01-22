@@ -21,6 +21,7 @@
     "sass": "^1.56.2",
     "svelte": "^3.54.0",
     "svelte-check": "^2.10.2",
+    "svelte-image-gallery": "^1.7.0",
     "svelte-preprocess": "^4.10.7",
     "svelte-spa-router": "^3.3.0",
     "tslib": "^2.4.1",
@@ -35,6 +36,7 @@
   "dependencies": {
     "@vitejs/plugin-basic-ssl": "^1.0.0",
     "siema": "^1.5.1",
+    "svelte-carousel": "^1.0.20",
     "svelte-material-icons": "^2.0.4"
   }
 }

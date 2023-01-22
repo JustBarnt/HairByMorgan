@@ -1,25 +1,11 @@
 <script lang="ts">
-    import { onMount } from "svelte";
-    import ChevronLeft from "svelte-material-icons/ChevronLeft.svelte";
-    import ChevronRight from "svelte-material-icons/ChevronRight.svelte";
-    import { cubicIn, cubicOut } from "svelte/easing";
-    import { slide } from "svelte/transition";
-    import Carousel from "./components/Carousel.svelte";
-
-    let animateIn = { duration: 500, easing: cubicOut, delay: 500 };
-    let animateOut = { duration: 500, easing: cubicIn };
-
-    let iconProps = { size: "2rem", color: "black", width: "48px", height: "48px", viewBox: "0 0 24 24" };
-    const weddingClientel = import.meta.glob("../src/assets/work/wedding-clientele/*.jpg");
-    const standardClientel = import.meta.glob("../src/assets/work/standard-clientele/*.jpg");
-
-    onMount(() => 
-    {
-        console.log(Object.keys(standardClientel));
-    });
+    import StandardPhotos from "./components/standardPhotos.svelte";
+    import WeddingPhotos from "./components/weddingPhotos.svelte";
+    import { images, weddingImages } from "./imageSource";
+        
 </script>
 
-<header in:slide={animateIn} out:slide={animateOut}>
+<header>
     <content class="logo">
         <div class="border-box">
             <p>Hair By Morgan</p>
@@ -30,15 +16,15 @@
             <li class="nav-item button"> <a href="#About">
                 About Me
             </a>
-        </li>
-            <li class="nav-item button"> <a href="#Work">
-                My Work
-            </a>
-        </li>
-            <li class="nav-item button"> <a href="#Contact">
-                Contact Me
-            </a>
-        </li>
+            </li>
+                <li class="nav-item button"> <a href="#Work">
+                    My Work
+                </a>
+            </li>
+                <li class="nav-item button"> <a href="#Contact">
+                    Contact Me
+                </a>
+            </li>
         </ul>
 </header>
 
@@ -46,7 +32,7 @@
     <content class="main">
         <section class="about-me" id="About">
             <div class="about-me-items">
-                <img src="../src/assets/about-me-photos/morgan_headshot.jpg" alt="Morgan Gebhart">
+                <img src="../about-me-photos/morgan_headshot.jpg" alt="Morgan Gebhart">
                 <article class="text">
                     <p class="about-me-image-name">Morgan Gebhart</p>
                     <h2 class="about-me-head">Welcome</h2>
@@ -60,18 +46,27 @@
             </div>
         </section>
         <section class="my-work" id="Work">
-            <div class="carousel">
-                <Carousel autoplay={2000}>
-                    {#each Object.keys(standardClientel) as image}
-                        <img class="carouselImg" src={`./src/${image}`} alt="" />
-                    {/each}
-                    <span slot="left-control"> <ChevronLeft { ...iconProps } /> </span>
-                    <span slot="right-control"> <ChevronRight { ...iconProps } /> </span>
-                </Carousel>
+            <article class="instructions">
+                <h2 class="article-title">My Work:</h2>
+                <p class="article-copy">Here are some of examples of work I have done, you can click the tab to switch between standard hair styles or wedding hair styles.</p>
+            </article>
+
+            <div>
+                <h3>Standard Hair</h3>
+                <StandardPhotos {images} />
             </div>
+
+            <div>
+                <h3>Wedding Hair</h3>
+                <WeddingPhotos {weddingImages} />
+           
         </section>
         <section class="contact-me" id="Contact">
-            <form action="mailto:" method="post" enctype="" name="contact-form" class="contact-form">
+            <article class="instructions">
+                <h2 class="article-title">Contact Me:</h2>
+                <p class="article-copy">Fill out the form below to reach out to me to get an appointment scheduled!</p>
+            </article>
+            <form action="mailto:morganlynnmach@gmail.com" method="post" enctype="" name="contact-form" class="contact-form">
                 <label class="label-name" for="name">Name</label>
                 <input class="input-name"type="text" name="name" id="name" placeholder="Name" required>
                 <label class="label-email" for="email">Email</label>
@@ -96,7 +91,7 @@
 <style lang="scss">
     header{
         position: sticky;
-        z-index: 10;
+        z-index: 9999;
         top: 0;
         height: fit-content;
         grid-area: a;
@@ -157,17 +152,31 @@
             display: flex;
             flex-flow: row wrap;
             justify-content: center;
+            gap: 4rem;
 
             section{
-                flex-basis:75%;
-                display: flex;
+                width: 95%;
+                row-gap: 4rem;
+
+                article{
+                    display: flex;
+                    row-gap: 2rem;
+                    flex-flow: column;
+                    padding: 1rem;
+                    text-align: center;
+                    h2{
+                        font-size: 2rem;
+                    }
+                    p{
+                        font-size: 1.4rem;
+                    }
+                }
             }
 
             .about-me{
                 display: flex;
                 
                 .about-me-items{
-                    flex-basis: 100%;
                     display: flex;
                     flex-flow: column wrap;
                     justify-content: center;
@@ -215,36 +224,30 @@
 
             .my-work{
                 display: flex;
-                flex-flow: column wrap;
-                justify-content: center;
-                align-items: center;
-                gap: 1rem;
-                padding: 1rem;
+                flex-flow: column;
+                align-content: center;
 
-                .carousel{
-                    padding: 1rem;
-                    width: 100%;
-                    height: 100%;
-                    max-width: 1000px;
-                    max-height: 1000px;
-                    border-radius: $bRadius;
-
-                    .carouselImg{
-                        width: 100%;
-                        height: 100%;
-                        object-fit: cover;
-                        border-radius: $bRadius;
-                        padding: 0 0.25rem;
+                div{
+                    display: flex;
+                    flex-direction: column;
+                    gap: 2rem;
+                    h3{
+                        font-size: 2rem;
+                        text-align: center;
+                        text-decoration: underline; 
                     }
                 }
             }
 
 
             .contact-me{
-                justify-content: center;
+                display:flex;
+                align-items: center;
+                flex-flow: column;
                 .contact-form{
                     display: grid;
-    
+                    align-content: center;
+                    justify-content: center;
                     gap: 1rem;
                     padding: 1rem;
     
@@ -330,17 +333,134 @@
     //Media Query for Mobile Menu switch
     @media screen and (max-width: 600px){
 
-        header{
-            display: grid;
-            justify-content: center;
-            justify-items: center;
-            gap: 1rem;
-            grid-auto-flow: row;
+#app{
+    height: 100vh;
+    display: flex;
+    overflow-y: auto;
+    width: fit-content;
+    overflow-x: hidden !important;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
 
-            .border-box{
-                font-size: 4rem;
-                padding: 3rem 2rem
-            }
+header{
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
+    width: 100vw;
+
+    .logo{
+        width: fit-content;
+
+        .border-box{
+            font-size: 4rem;
+            padding: 3rem 2rem
         }
     }
+
+    nav{
+        display: flex;
+        width: fit-content;
+    }
+}
+
+#gallery{
+    .column{
+        display: flex !important;
+        flex-flow: row wrap !important;
+        column-gap: 5px !important;
+        justify-content: center !important;
+        
+        img{
+            width: 50% !important;
+            max-width: 420px !important;
+            height: auto !important;
+            object-fit: cover !important;
+            border-radius: .25rem !important;
+            flex-basis: 49% !important;
+        }
+    }
+}
+
+main{
+    width: fit-content;
+    display: flex;
+
+    .main{
+        display: flex;
+        flex-flow: row wrap;
+        gap: 4rem;
+        width: fit-content;
+
+        .about-me{
+            display: flex;
+            width: auto;
+            row-gap: 4rem;
+
+            .about-me-items{
+                width: 100vw;
+                img{
+                    max-width: 420px;
+                    height: auto;
+                    object-fit: cover;
+                    border-radius: .25rem;
+                    width: 100%;
+                }
+
+                .about-me-image-name{
+                    width: auto !important;
+                }
+
+                .about-me-bio{
+                    display: flex;
+                    flex-flow: column;
+                    gap: 2rem;
+                    width: fit-content;
+                }
+            }
+        }
+
+        .my-work{
+            display: flex;
+            flex-flow: column;
+            width: auto;
+            row-gap: 4rem;
+
+            .instructions{
+                width: 100vw;
+
+                .article-copy{
+                    display: flex;
+                    flex-flow: column;
+                    gap: 2rem;
+                    width: fit-content;
+                    font-size: 1.4rem;
+                    line-height: 1.5rem;
+                }
+            }
+
+        }
+
+        .contact-me{
+            form{
+                display: flex;
+                flex-direction: column;
+                align-content: center;
+                justify-content: center;
+                gap: 1rem;
+                padding: 1rem;
+            }
+
+            .article-copy{
+                    display: flex;
+                    flex-flow: column;
+                    gap: 2rem;
+                    width: fit-content;
+                    font-size: 1.4rem;
+                    line-height: 1.5rem;
+                }
+        }
+    }
+}
+}
 </style>

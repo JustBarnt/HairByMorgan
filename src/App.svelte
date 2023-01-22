@@ -2,6 +2,14 @@
     import StandardPhotos from "./components/standardPhotos.svelte";
     import WeddingPhotos from "./components/weddingPhotos.svelte";
     import { images, weddingImages } from "./imageSource";
+    import Instagram from "svelte-material-icons/Instagram.svelte";
+    import Twitter from "svelte-material-icons/Twitter.svelte";
+
+    const iconSize = "4rem";
+    const width = iconSize;
+    const height = iconSize;
+    const color = "currentColor";
+    const viewBox = "0 0 24 24";
         
 </script>
 
@@ -32,9 +40,9 @@
     <content class="main">
         <section class="about-me" id="About">
             <div class="about-me-items">
-                <img src="../about-me-photos/morgan_headshot.jpg" alt="Morgan Gebhart">
+                <img src="../about-me-photos/morgan_headshot.jpg" alt="Morgan Gebhardt">
                 <article class="text">
-                    <p class="about-me-image-name">Morgan Gebhart</p>
+                    <p class="about-me-image-name">Morgan Gebhardt</p>
                     <h2 class="about-me-head">Welcome</h2>
                     <p class="about-me-bio">
                     If you are interested in a new look or just a touch up, you've come to the right place! I love to help clients find what they're looking for.
@@ -42,6 +50,14 @@
                     
                     Keep up with my latest services by visiting the social links below.
                     </p>
+                    <div class="socials">
+                        <a href="https://www.instagram.com/morgangebhardthair/" target="_blank" rel="noreferrer">
+                            <Instagram {width} {height} {color} {viewBox} />
+                        </a>
+                        <a href="https://www.facebook.com/profile.php?id=100063681005365" target="_blank" rel="noreferrer">
+                            <Twitter {width} {height} {color} {viewBox} />
+                        </a>
+                    </div>
                 </article>
             </div>
         </section>
@@ -52,13 +68,12 @@
             </article>
 
             <div>
-                <h3>Standard Hair</h3>
                 <StandardPhotos {images} />
             </div>
 
             <div>
-                <h3>Wedding Hair</h3>
                 <WeddingPhotos {weddingImages} />
+            </div>
            
         </section>
         <section class="contact-me" id="Contact">
@@ -80,7 +95,7 @@
 </main>
 
 <footer>
-    <p class="footer">HairByMorgan owned by Morgan Gebhart ©{new Date().getFullYear()}</p>
+    <p class="footer">HairByMorgan owned by Morgan Gebhardt ©{new Date().getFullYear()}</p>
     <section class="sitemap">
         <p class="button">About Me</p>
         <p class="button">My Work</p>
@@ -183,6 +198,17 @@
                     align-items: center;
                     gap: 1rem;
                     padding: 1rem;
+
+                    .socials{
+                        display: flex;
+                        gap: 2rem;
+
+                        a, a:hover, a:focus, a:active {
+                            text-decoration: none;
+                            color: inherit;
+                        }
+                        
+                    }
     
                     img{
                         max-width: 420px;
